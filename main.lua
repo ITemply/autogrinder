@@ -96,6 +96,7 @@ task.spawn(function()
 				if currentRevs >= revolutions then
 					rejoin()
 				end
+				task.wait(0.01)
 			end
 		end)
 	end
