@@ -5,7 +5,7 @@ Execute the code snip below into your executor and let the grinding happen.
 
 ```lua
 local loadData = {
-    ['revolutions'] = 10000000 -- how many times the bot will repeat before rejoining
+    ['revolutions'] = 10000000, -- how many times the bot will repeat before rejoining
     ['alwaysOn'] = true -- bypasses the setting above to constantly run (reccomended for client that don't lag)
 }
 
