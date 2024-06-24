@@ -11,7 +11,11 @@ local coinEvent = replicatedStorage:WaitForChild('Events'):WaitForChild('CoinEve
 
 local NPCS = workspace:WaitForChild('NPC')
 
+local jobId = game.JobId
+local placeId = game.PlaceId
+
 local revolutions = 0
+local currentRevs = 0
 local alwaysOn = true
 
 local getKills = function(damageEvent)
@@ -57,15 +61,44 @@ local keepAlive = function()
 	end)
 end
 
+local rejoin = function()
+	if #players:GetPlayers() <= 1 then
+		client:Kick('GAME REJOIN')
+		wait()
+		TeleportService:Teleport(placeId, client)
+	else
+		TeleportService:TeleportToPlaceInstance(placeId, jobId, client)
+	end
+end
+
 local loadOutsideArgs = function(outsideArgs)
 	task.spawn(function()
 		alwaysOn = outsideArgs[1]['alwaysOn']
+		revolutions = outsideArgs[1]['revs']
 	end)
 end
 
-keepAlive()
-getKills(damageEvent)
-getCoins(coinEvent)
 loadOutsideArgs(outsideData)
+
+task.spawn(function()
+	if alwaysOn then
+		keepAlive()
+		getKills(damageEvent)
+		getCoins(coinEvent)
+	else
+		keepAlive()
+		getKills(damageEvent)
+		getCoins(coinEvent)
+			
+		task.spawn(function()
+			while true do
+				currentRevs = currentRevs + 1
+				if currentRevs >= revolutions then
+					rejoin()
+				end
+			end
+		end)
+	end
+end)
 
 print('TEM AUTO GRINDER STARTED\n\nThis will now run until you leave.')
