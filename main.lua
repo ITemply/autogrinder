@@ -7,6 +7,7 @@ local players = game:GetService('Players')
 local client = players.LocalPlayer
 
 local damageEvent = replicatedStorage:WaitForChild('jdskhfsIIIllliiIIIdchgdIiIIIlIlIli')
+local coinEvent = replicatedStorage:WaitForChild('Events'):WaitForChild('CoinEvent')
 
 local NPCS = workspace:WaitForChild('NPC')
 
@@ -38,6 +39,15 @@ local getKills = function(damageEvent)
 	end)
 end
 
+local getCoins = function(coinEvent)
+	task.spawn(function()
+		while true do
+			coinEvent:FireServer()
+			task.wait(0.5)
+		end
+	end)
+end
+
 local keepAlive = function()
 	task.spawn(function()
 		client.Idled:Connect(function()
@@ -55,6 +65,7 @@ end
 
 keepAlive()
 getKills(damageEvent)
+getCoins(coinEvent)
 loadOutsideArgs(outsideData)
 
 print('TEM AUTO GRINDER STARTED\n\nThis will now run until you leave.')
