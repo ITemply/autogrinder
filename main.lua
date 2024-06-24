@@ -46,10 +46,11 @@ local keepAlive = function()
 end
 
 local loadOutsideArgs = function(outsideArgs)
-	revolutions = outsideArgs[1]['revolutions']
 	alwaysOn = outsideArgs[1]['alwaysOn']
 end
 
 loadOutsideArgs(outsideData)
 keepAlive()
 getKills()
+
+print('TEM AUTO GRINDER STARTED\n\nThis will now run until you leave.')
