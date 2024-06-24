@@ -54,7 +54,7 @@ local loadOutsideArgs = function(outsideArgs)
 end
 
 keepAlive()
-getKills()
+getKills(damageEvent)
 loadOutsideArgs(outsideData)
 
 print('TEM AUTO GRINDER STARTED\n\nThis will now run until you leave.')
