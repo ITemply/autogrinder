@@ -21,7 +21,7 @@ local getKills = function(damageEvent)
 					local s, e = pcall(function()
 						local hitBoss = entity:FindFirstChild('Humanoid')
 
-						local local damageArgs = {
+						local damageArgs = {
 							[1] = hitBoss,
 							[2] = 1
 						}
