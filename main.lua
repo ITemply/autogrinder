@@ -2,7 +2,7 @@ local outsideData  = {...}
 
 local replicatedStorage = game:GetService('ReplicatedStorage')
 local virtualUser = game:GetService('VirtualUser')
-local players = game:GetService('players')
+local players = game:GetService('Players')
 
 local client = players.LocalPlayer
 
