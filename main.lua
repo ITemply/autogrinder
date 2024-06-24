@@ -39,18 +39,22 @@ local getKills = function(damageEvent)
 end
 
 local keepAlive = function()
-	client.Idled:Connect(function()
-		virtualUser:CaptureController()
-		virtualUser:ClickButton2(Vector2.new())
+	task.spawn(function()
+		client.Idled:Connect(function()
+			virtualUser:CaptureController()
+			virtualUser:ClickButton2(Vector2.new())
+		end)
 	end)
 end
 
 local loadOutsideArgs = function(outsideArgs)
-	alwaysOn = outsideArgs[1]['alwaysOn']
+	task.spawn(function()
+		alwaysOn = outsideArgs[1]['alwaysOn']
+	end)
 end
 
-loadOutsideArgs(outsideData)
 keepAlive()
 getKills()
+loadOutsideArgs(outsideData)
 
 print('TEM AUTO GRINDER STARTED\n\nThis will now run until you leave.')
